@@ -64,10 +64,26 @@ int main()
     system("cls");
     system("title Airlines Reservation System Program");
     system("color 0f");
+    // Initial Load End
+
+    // Call Methods
     db_response::ConnectionFunction();
+    // Call Methods End
+
+    // Variables
     int chooseOneFromMenu = 0;
     char exitSurity;
+    // Variables End
 
+    cout << "Welcome To Airlines Reservation System" << endl << endl;
+    cout << "Airlines Reservation System Menu" << endl;
+    cout << "1. Reserve Seat." << endl;
+    cout << "2. User Ticket." << endl;
+    cout << "3. Flights Schedule." << endl;
+    cout << "4. Display Passenger." << endl;
+    cout << "5. Flight Details." << endl;
+    cout << "6. Exit Program." << endl;
+    cout << "Choose One: ";
     cin >> chooseOneFromMenu;
 
     switch (chooseOneFromMenu)
@@ -89,7 +105,7 @@ int main()
         break;
     case 6:
         ExitProgram:
-
+        cout << "Program terminating. Are you sure? (y/N): ";
         cin >> exitSurity;
         if (exitSurity == 'y' || exitSurity == 'Y') {
             return 0;
@@ -102,6 +118,7 @@ int main()
         }
         break;
     default:
+        cout << "Please choose between The Given Numbers. Press Enter To Continue...";
         getch();
         system("cls");
         main();
@@ -109,7 +126,8 @@ int main()
     }
     return 0;
 }
-
+// Airlines Reservation System - CodeWithC.com
+// Functions
 void ReserveSeat()
 {
     // Initial Load
@@ -152,10 +170,10 @@ void ReserveSeat()
     {
         res = mysql_store_result(conn);
         printf("--------------------------------------------------------------------------------------------------------------------\n");
-        printf("Flight No", "From", "Destination", "Time", "Amount");
+        printf("| %-20s | %-20s | %-20s | %-20s | %-20s |\n", "Flight No", "From", "Destination", "Time", "Amount");
         while ((row = mysql_fetch_row(res)))
         {
-            printf("| %s | %s | %s | %-s | %s |\n", row[1], row[3], row[4], row[5], row[6]);
+            printf("| %-20s | %-20s | %-20s | %-20s | %-20s |\n", row[1], row[3], row[4], row[5], row[6]);
         }
         printf("--------------------------------------------------------------------------------------------------------------------\n");
 }
@@ -202,8 +220,12 @@ void UserTicket()
 {
     // Initial Load
     system("cls");
+    // Initial Load End
+
+    // Variables
     string input = "";
     char choose;
+    // Variables End
 
     cout << "Welcome To Airlines Reservation System" << endl << endl;
     cout << "User Ticket Menu" << endl << endl;
@@ -256,7 +278,10 @@ void FlightSchedule()
 
     // Variables
     char choose;
+    // Variables End
 
+    cout << "Welcome To Airlines Reservation System" << endl << endl;
+    cout << "Flight Schedule" << endl << endl;
 
     qstate = mysql_query(conn, "select * from flightdetails_tb");
     if (!qstate)
@@ -293,8 +318,14 @@ void DisplayPassenger()
 {
     // Initial Load
     system("cls");
-    char choose;
+    // Initial Load End
 
+    // Variables
+    char choose;
+    // Variables End
+
+    cout << "Welcome To Airlines Reservation System" << endl << endl;
+    cout << "Display Passenger Menu" << endl << endl;
 
     qstate = mysql_query(conn, "select * from userreservation_tb");
     if (!qstate)
@@ -394,6 +425,13 @@ void AddNewFlight()
     string flightAmount = "";
     string flightAvailability = "";
     char choose;
+    // Variables End
+
+    // Store Variables
+    // Store Variables End
+
+    cout << "Welcome To Airlines Reservation System" << endl << endl;
+    cout << "Add New Flight Menu" << endl << endl;
 
     cin.ignore(1, '\n');
     cout << "Enter Flight No: ";
@@ -426,6 +464,7 @@ void AddNewFlight()
         cout << "Query Execution Problem!" << mysql_errno(conn) << endl;
     }
 
+    // Exit Code
     cout << "Press 'm' to Flight Details Menu and 'a' to Insert Again Or Any Other key to exit: ";
     cin >> choose;
     if (choose == 'm' || choose == 'M')
@@ -470,6 +509,10 @@ void EditFlight()
     string storeFlightAmount = "";
     string storeUserTripPlan2d[500][500];
     int storeIndex1 = 0, storeIndex2 = 0;
+    // Variables End
+
+    cout << "Welcome To Airlines Reservation System" << endl << endl;
+    cout << "Edit Flight Record" << endl;
 
 
     qstate = mysql_query(conn, "select * from flightdetails_tb");
@@ -893,6 +936,3 @@ void FlightLeaveArrive()
         exit(0);
     }
 }
-
-
-
