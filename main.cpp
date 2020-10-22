@@ -55,6 +55,7 @@ void AddNewFlight();
 void EditFlight();
 void DeleteFlight();
 void FlightLeaveArrive();
+void generateTicket();
 
 // Functions End
 
@@ -268,6 +269,7 @@ void UserTicket()
     {
         exit(0);
     }
+    generateTicket();
 }
 
 void FlightSchedule()
@@ -934,5 +936,60 @@ void FlightLeaveArrive()
     else
     {
         exit(0);
+    }
+}
+
+void issue_ticket (int flight_num , int ticket_num, string name)
+{
+    cout<<" \t \t ***************************** \n";
+
+    cout<<"Flight number : "<<flight_num<<"\n";
+    cout<<"Ticket number: "<<ticket_num ++<<"\n";
+    cout<<"Issued for: "<<name<<"\n";
+
+    cout<<" \t \t ***************************** \n";
+}
+
+void generateTicket()
+{
+    string name;
+    char reply;
+    int ticket_num=0;
+
+    cout<<"Do you want to book a ticket (y/n) \n";
+    cin>>reply;
+
+    if(reply=='n')
+    {
+        cout<<"Thanks for using our program \n";
+        return 0;
+    }
+
+    //Loop to make a repetition for book a ticket
+    while(reply=='y')
+    {  
+        ticket_num++;
+
+        // >=25, >=50, >=75...
+        //if (ticket_num % 25 == 0)
+        //flight_num++;
+
+        cout<<"please enter your name as written in your passport \n";
+        cin>>name;
+
+        issue_ticket(flight_num, ticket_num, name);
+
+        // >25, >50, >75...
+        if (ticket_num % 25 == 0)
+            flight_num++;
+
+        cout<<"Do you wan to book onther one (y/n)"<<"\n";
+        cin>>reply;
+
+        if(reply=='n')
+        {
+            cout<<"Thanks for using our program \n";
+            return 0;
+        }
     }
 }
